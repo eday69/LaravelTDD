@@ -17,9 +17,20 @@ class InvitationsTest extends TestCase
     {
 //        $this->withoutExceptionHandling();
 
-        $this->actingAs(factory(User::class)->create())
-            ->post(ProjectFactory::create()->path() . '/invitations')
-            ->assertStatus(403);
+        $project = ProjectFactory::create();
+        $user = factory(User::class)->create();
+
+        $assertInvitationForbidden = function () USE ($user, $project) {
+            $this->actingAs($user)
+                ->post($project->path() . '/invitations')
+                ->assertStatus(403);
+        };
+
+        $assertInvitationForbidden();
+
+        $project->invite($user);
+
+        $assertInvitationForbidden();
     }
 
     /** @test */
@@ -43,16 +54,16 @@ class InvitationsTest extends TestCase
     /** @test */
     public function the_email_address_must_be_associated_with_a_valid_birdboard_account()
     {
+//        $this->withoutExceptionHandling();
         $project = ProjectFactory::create();
-
 
         $this->actingAs($project->owner)
             ->post($project->path() . '/invitations', [
-                'email' => 'notauser@example.com'
+                'email' => 'notAuser@example.com'
             ])
             ->assertSessionHasErrors([
                 'email' => 'The user you are inviting must have a Birdboard account.'
-            ]);
+            ], null, 'invitations');
     }
 
     /** @test */
