@@ -659,7 +659,6 @@ video {
 
 .button {
   background-color: var(--button-background-color);
-  color: var(--text-default-color);
   text-decoration: none;
   border-radius: 0.5rem;
   font-size: 0.875rem;
@@ -667,7 +666,22 @@ video {
   padding-right: 1.25rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  color: white;
+}
+
+.button.is-outlined {
+  background-color: var(--card-background-color);
+  border-width: 1px;
+  border-color: var(--text-accent-color);
+  color: var(--text-accent-color);
+}
+
+.theme-light .button {
   box-shadow: 0 2px 7px 0 #b0eaff;
+}
+
+.theme-dark .button {
+  box-shadow: 0 2px 7px 0 #00658b;
 }
 
 .card {
