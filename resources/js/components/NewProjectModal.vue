@@ -40,7 +40,7 @@
                             class="border border-muted-light mb-2  p-2 text-xs block w-full rounded"
                             placeholder="Task"
                             v-for="task in form.tasks"
-                            v-model="task.value">
+                            v-model="task.body">
                     </div>
                     <button type="button" class="inline-flex items-center text-xs" @click="addTask">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" class="mr-2">
@@ -57,7 +57,7 @@
             </div>
 
             <footer class="flex justify-end">
-                <button class="button is-outlined mr-4" @click="$modal.hide('new-project')">Cancel</button>
+                <button type="button" class="button is-outlined mr-4" @click="$modal.hide('new-project')">Cancel</button>
                 <button class="button">Create Project</button>
             </footer>
 
@@ -74,7 +74,7 @@
                     title: '',
                     description: '',
                     tasks: [
-                        { value: '' },
+                        { body: '' },
                     ]
                 },
                 errors: {}

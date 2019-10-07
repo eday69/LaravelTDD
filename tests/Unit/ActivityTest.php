@@ -20,6 +20,6 @@ class ActivityTest extends TestCase
 
         $project = ProjectFactory::ownedBy($user)->create();
 
-        $this->assertEquals($user->id . "23", $project->activity->first()->user->id);
+        $this->assertEquals($user->id, $project->activity->first()->user->id);
     }
 }
